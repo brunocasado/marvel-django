@@ -7,25 +7,21 @@ class MarvelDataContainer:
 
         self.offset = CustomerContainer['offset']
         self.total = CustomerContainer['total']
+        self.count = CustomerContainer['count']
         self.limit = CustomerContainer['limit']
         self.results = CustomerContainer['results']
 
-        self.next_offset = self.offset * 2
+        self.next_offset = (self.offset + self.count)
 
         self._CustomerContainer = CustomerContainer
         self._CurrentMarvelConnection = CurrentMarvelConnection
         self._current_method = current_method
-
-    # def __iter__(self):
-    #     return self
-
-    def next(self):
-        # make generator
-        if (len(self._CustomerContainer.results)):
-            return self._CurrentMarvelConnection._call(self._current_method, { 'offset': self.next_offset })
-        raise Exception('No more results =(')
-
-
+    
+    def next_data(self):
+        # try make generator
+        if (len(self._CustomerContainer['results'])):
+            return self._CurrentMarvelConnection._call(self._current_method, params={ 'offset': self.next_offset })
+        raise StopIteration()
 
 # a very simple way to connect on marvel api
 class MarvelConnect(object):
