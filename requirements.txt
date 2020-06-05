@@ -6,7 +6,7 @@ celery==4.2.1
 certifi==2018.10.15
 chardet==3.0.4
 decorator==4.3.0
-Django==2.1.2
+Django==2.2.13
 idna==2.7
 ipython==7.0.1
 ipython-genutils==0.2.0
